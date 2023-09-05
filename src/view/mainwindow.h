@@ -1,12 +1,15 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDebug>
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include "../viewmodel/editorviewmodel.h"
 #include "ui_mainwindow.h"
+
+#include "../viewmodel/editorviewmodel.h"
 #include "tabwidget.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

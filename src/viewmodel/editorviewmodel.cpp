@@ -2,13 +2,17 @@
 
 EditorViewModel::EditorViewModel(QObject *parent) : QObject(parent) {}
 
+QString EditorViewModel::getFileContent() const
+{
+    return m_fileContent;
+}
+
 bool EditorViewModel::openFile(const QString &filePath)
 {
-    QString content;
-    if (!m_fileManager.readFile(filePath, content))
-        return false;
+    if (m_fileManager.readFile(filePath, m_fileContent))
+        emit fileContentChanged(m_fileContent); // Émettre le signal
+        return true;
 
-    emit fileContentChanged(content); // Émettre le signal
 
-    return true;
+    return false;
 }
