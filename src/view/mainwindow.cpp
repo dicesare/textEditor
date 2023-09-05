@@ -3,21 +3,23 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
-    // connect(m_editorViewModel, &EditorViewModel::fileContentChanged, this, &MainWindow::updateFileContent);
+    connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
+}
 
-
+MainWindow::~MainWindow()
+{
+    delete ui;
 }
 
 void MainWindow::openFile()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, "Open File", QString(), "Text Files (*.txt);;All Files (*)");
+    QString filePath = QFileDialog::getOpenFileName(this, "Open File", QString(), "All Files (*)");
     if (!filePath.isEmpty())
     {
         if (m_editorViewModel.openFile(filePath))
         {
-            ui->windowDisplayText->setPlainText(m_editorViewModel.getFileContent());
+            ui->windowDisplayText->setText(m_editorViewModel.getFileContent());
         }
         else
         {
@@ -26,12 +28,20 @@ void MainWindow::openFile()
     }
 }
 
-void MainWindow::updateFileContent(const QString &content)
+void MainWindow::saveFile()
 {
-    ui->windowDisplayText->setPlainText(content);
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
+    QString filePath = QFileDialog::getSaveFileName(this, "Save File", QString(), "All Files (*)");
+    if (!filePath.isEmpty())
+    {
+        QString content = ui->windowDisplayText->toPlainText(); // Récupérer le contenu du QTextEdit
+        m_editorViewModel.setFileContent(content); // Mettre à jour le contenu du fichier
+        if (m_editorViewModel.saveFile(filePath))
+        {
+            QMessageBox::information(this, "Success", "File saved successfully.");
+        }
+        else
+        {
+            QMessageBox::critical(this, "Error", "Failed to save the file.");
+        }
+    }
 }

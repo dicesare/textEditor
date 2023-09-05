@@ -25,8 +25,7 @@ public:
 
 private slots:
     void openFile();
-    void updateFileContent(const QString& content); // Déclarer le slot
-
+    void saveFile();
 
 private:
     Ui::MainWindow *ui;

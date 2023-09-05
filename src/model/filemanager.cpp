@@ -1,7 +1,7 @@
 #include "filemanager.h"
 
 
-FileManager::FileManager(QObject *parent) : QObject(parent) {}
+FileManager::FileManager() {}
 
 bool FileManager::readFile(const QString &filePath, QString &content)
 {
@@ -13,5 +13,16 @@ bool FileManager::readFile(const QString &filePath, QString &content)
     content = in.readAll();
     file.close();
 
+    return true;
+}
+
+bool FileManager::writeFile(const QString &filePath, QString &content)
+{
+    QFile file(filePath);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return false;
+    QTextStream out(&file);
+    out << content;
+    file.close();
     return true;
 }
