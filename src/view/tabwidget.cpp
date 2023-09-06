@@ -1,11 +1,11 @@
 // tabwidget.cpp
 #include "tabwidget.h"
-#include <QTextEdit>
 
 
 TabWidget::TabWidget(QWidget *parent) : QTabWidget(parent)
 {
     connect(this, &QTabWidget::tabCloseRequested, this, &TabWidget::closeTab);
+    // connect(ui->tabWidgetEditor,  &QAction::triggered, this,&TabWidget::closeTab);
 }
 
 void TabWidget::addTabWithContent(const QString &content, const QString &filePath)

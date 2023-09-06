@@ -7,12 +7,14 @@
 #include <QFileDialog>
 #include <QVector>
 
-#include <ui_mainwindow.h>
 #include "../viewmodel/editorviewmodel.h"
+
+
 
 class TabWidget : public QTabWidget
 {
     Q_OBJECT
+
 public:
     explicit TabWidget(QWidget *parent = nullptr);
     void addTabWithContent(const QString &content, const QString &filePath);
@@ -24,6 +26,7 @@ private slots:
 private:
     EditorViewModel m_editorViewModel;
     QVector<bool> m_modifiedTabs; // Utilisez QVector<bool> pour stocker l'état de chaque onglet
+
 };
 
 
