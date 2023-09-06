@@ -22,12 +22,19 @@ bool EditorViewModel::openFile(const QString &filePath)
     return false;
 }
 
-bool EditorViewModel::saveFile(const QString &filePath)
+bool EditorViewModel::saveFile(const QString &filePath, const QString &content)
 {
-    if(m_fileManager.writeFile(filePath, m_fileContent))
+    QFile file(filePath);
+    qDebug() << filePath;
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        emit fileContentChanged(m_fileContent); // Émettre le signal
-        return true;
+        qDebug() << "Error opening file for writing:" << file.errorString();
+        return false;
     }
-    return false;
+
+    QTextStream out(&file);
+    out << content;
+    file.close();
+
+    return true;
 }
