@@ -4,6 +4,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QString>
+#include <iostream>
+#include <QDebug>
 
 class FileManager
 {

@@ -5,9 +5,11 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include "ui_mainwindow.h"
+#include <ui_mainwindow.h>
 
 #include "../viewmodel/editorviewmodel.h"
+// #include "../controller/tabcontroller.h"
+
 #include "tabwidget.h"
 
 
@@ -29,6 +31,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    // TabController *m_tabController;
     EditorViewModel m_editorViewModel;
+    TabWidget *m_tabWidget;
 };
 #endif // MAINWINDOW_H

@@ -1,8 +1,12 @@
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    m_tabWidget = new TabWidget(this); // Instancier le TabWidget
+    setCentralWidget(m_tabWidget);     // Définir le TabWidget comme widget central
+
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
 }
@@ -19,7 +23,11 @@ void MainWindow::openFile()
     {
         if (m_editorViewModel.openFile(filePath))
         {
-            ui->windowDisplayText->setText(m_editorViewModel.getFileContent());
+            // Utiliser QFileInfo pour extraire le nom du fichier
+            QFileInfo fileInfo(filePath);
+            QString fileName = fileInfo.fileName();
+
+            m_tabWidget->addTabWithContent(m_editorViewModel.getFileContent(), fileName); // Ajouter un nouvel onglet avec le contenu et le nom du fichier
         }
         else
         {
@@ -30,18 +38,25 @@ void MainWindow::openFile()
 
 void MainWindow::saveFile()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, "Save File", QString(), "All Files (*)");
-    if (!filePath.isEmpty())
+    // Récupérer l'index de l'onglet actif dans le TabWidget
+    int activeTabIndex = m_tabWidget->currentIndex();
+    if (activeTabIndex != -1)
     {
-        QString content = ui->windowDisplayText->toPlainText(); // Récupérer le contenu du QTextEdit
-        m_editorViewModel.setFileContent(content); // Mettre à jour le contenu du fichier
-        if (m_editorViewModel.saveFile(filePath))
+        QTextEdit *textEdit = qobject_cast<QTextEdit *>(m_tabWidget->widget(activeTabIndex));
+        if (textEdit)
         {
-            QMessageBox::information(this, "Success", "File saved successfully.");
-        }
-        else
-        {
-            QMessageBox::critical(this, "Error", "Failed to save the file.");
+            QString content = textEdit->toPlainText();
+            QString filePath = m_tabWidget->tabText(activeTabIndex); // Utilisez tabText au lieu de tabToolTip
+            qDebug() << filePath;
+            if (m_editorViewModel.saveFile(filePath, content))
+            {
+                m_tabWidget->setTabText(activeTabIndex, filePath);
+                QMessageBox::information(this, "Success", "File saved successfully.");
+            }
+            else
+            {
+                QMessageBox::critical(this, "Error", "Failed to save the file.");
+            }
         }
     }
 }
