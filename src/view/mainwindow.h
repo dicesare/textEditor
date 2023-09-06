@@ -5,10 +5,9 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <ui_mainwindow.h>
+#include "ui_mainwindow.h"
 
 #include "../viewmodel/editorviewmodel.h"
-// #include "../controller/tabcontroller.h"
 
 #include "tabwidget.h"
 
