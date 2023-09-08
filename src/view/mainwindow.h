@@ -5,9 +5,10 @@
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include "ui_mainwindow.h"
+#include <ui_mainwindow.h>
 
-#include "../viewmodel/editorviewmodel.h"
+#include "../controller/controllereditor.h"
+#include "../filemanagement/pathglobal.h"
 
 #include "tabwidget.h"
 
@@ -23,6 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    QString getCurrentDirectory() const;
 
 private slots:
     void openFile();
@@ -30,8 +32,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    // TabController *m_tabController;
-    EditorViewModel m_editorViewModel;
+    ControllerEditor m_controllerEditor;
     TabWidget *m_tabWidget;
+    QString mCurrentDirectory = PathGlobal::getGlobalPath();
 };
 #endif // MAINWINDOW_H

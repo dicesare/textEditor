@@ -1,14 +1,15 @@
-#ifndef EDITORVIEWMODEL_H
-#define EDITORVIEWMODEL_H
+#ifndef CONTROLLEREDITOR_H
+#define CONTROLLEREDITOR_H
+
 
 #include <QObject>
-#include "../model/filemanager.h"
+#include "../filemanagement/filemanager.h"
 
-class EditorViewModel : public QObject
+class ControllerEditor : public QObject
 {
     Q_OBJECT
 public:
-    explicit EditorViewModel(QObject *parent = nullptr);
+    explicit ControllerEditor(QObject *parent = nullptr);
 
     QString getFileContent() const;
     void setFileContent(const QString &content);
@@ -25,4 +26,4 @@ private:
     QString m_fileContent; // Variable pour stocker le contenu du fichier
 };
 
-#endif // EDITORVIEWMODEL_H
+#endif // CONTROLLEREDITOR_H
