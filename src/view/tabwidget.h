@@ -7,7 +7,9 @@
 #include <QFileDialog>
 #include <QVector>
 
-#include "../viewmodel/editorviewmodel.h"
+#include "../controller/controllereditor.h"
+#include "../filemanagement/pathglobal.h"
+#include "customtextedit.h"
 
 
 
@@ -19,14 +21,19 @@ public:
     explicit TabWidget(QWidget *parent = nullptr);
     void addTabWithContent(const QString &content, const QString &filePath);
     void setTabModified(int index, bool modified);
+    void handleTextModified(bool modified);
 
-private slots:
+public slots:
     void closeTab(int index);
 
-private:
-    EditorViewModel m_editorViewModel;
-    QVector<bool> m_modifiedTabs; // Utilisez QVector<bool> pour stocker l'état de chaque onglet
+signals:
+    void fileModified (bool modified);
 
+private:
+    ControllerEditor m_controllerEditor;
+    QVector<bool> m_modifiedTabs; // Utilisez QVector<bool> pour stocker l'état de chaque onglet
+    CustomTextEdit *m_currentTextEdit;
+    QString mCurrentDirectory = PathGlobal::getGlobalPath();
 };
 
 

@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
+    connect(ui->tabWidgetEditor, &QTabWidget::tabCloseRequested, m_tabWidget, &TabWidget::closeTab);
 }
 
 MainWindow::~MainWindow()
@@ -17,16 +18,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::openFile()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, "Open File", QString(), "All Files (*)");
+    QString filePath = QFileDialog::getOpenFileName(this, "Open File", mCurrentDirectory, "All Files (*)");
     if (!filePath.isEmpty())
     {
-        if (m_editorViewModel.openFile(filePath))
+        if (m_controllerEditor.openFile(filePath))
         {
             // Utiliser QFileInfo pour extraire le nom du fichier
             QFileInfo fileInfo(filePath);
+            mCurrentDirectory = fileInfo.absolutePath();
             QString fileName = fileInfo.fileName();
 
-            m_tabWidget->addTabWithContent(m_editorViewModel.getFileContent(), fileName); // Ajouter un nouvel onglet avec le contenu et le nom du fichier
+            m_tabWidget->addTabWithContent(m_controllerEditor.getFileContent(), fileName); // Ajouter un nouvel onglet avec le contenu et le nom du fichier
+            m_tabWidget->setTabModified(m_tabWidget->count() - 1, false);                 // Initialiser l'état modifié à false
         }
         else
         {
@@ -45,11 +48,10 @@ void MainWindow::saveFile()
         if (textEdit)
         {
             QString content = textEdit->toPlainText();
-            QString filePath = m_tabWidget->tabText(activeTabIndex); // Utilisez tabText au lieu de tabToolTip
-            qDebug() << filePath;
-            if (m_editorViewModel.saveFile(filePath, content))
+            QString filePath = mCurrentDirectory + "/" + m_tabWidget->tabToolTip(activeTabIndex);
+            if (m_controllerEditor.saveFile(filePath, content))
             {
-                m_tabWidget->setTabText(activeTabIndex, filePath);
+                m_tabWidget->setTabText(activeTabIndex, m_tabWidget->tabToolTip(activeTabIndex));
                 QMessageBox::information(this, "Success", "File saved successfully.");
             }
             else

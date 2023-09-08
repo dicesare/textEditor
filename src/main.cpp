@@ -11,6 +11,8 @@
  */
 int main(int argc, char *argv[])
 {
+    // Initialisez le chemin global dès le début
+    PathGlobal::setGlobalPath(QDir::homePath() + "/Documents");
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

@@ -9,15 +9,19 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    src/model/filemanager.cpp \
-    src/viewmodel/editorviewmodel.cpp \
+    src/filemanagement/filemanager.cpp \
+    src/controller/controllereditor.cpp \
+    src/filemanagement/pathglobal.cpp \
+    src/view/customtextedit.cpp \
     src/view/tabwidget.cpp \
     src/view/mainwindow.cpp \
     src/main.cpp
 
 HEADERS += \
-    src/model/filemanager.h \
-    src/viewmodel/editorviewmodel.h \
+    src/filemanagement/filemanager.h \
+    src/controller/controllereditor.h \
+    src/filemanagement/pathglobal.h \
+    src/view/customtextedit.h \
     src/view/mainwindow.h \
     src/view/tabwidget.h
 
