@@ -1,14 +1,20 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
+MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    m_initialTabWidget(true)
 {
     ui->setupUi(this);
-    m_tabWidget = new TabWidget(this); // Instancier le TabWidget
-    setCentralWidget(m_tabWidget);     // Définir le TabWidget comme widget central
+    // Connecter l'onglet initial
+    CustomTextEdit *initialTextEdit = new CustomTextEdit(this);
+    ui->tabWidgetEditor->removeTab(0);
+    ui->tabWidgetEditor->addTab(initialTextEdit, "tab1");
+    ui->tabWidgetEditor->setTabToolTip(0, mCurrentDirectory);
+    connect(initialTextEdit, &CustomTextEdit::textModified, ui->tabWidgetEditor, &TabWidgetEditor::handleTextModified);
 
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
-    connect(ui->tabWidgetEditor, &QTabWidget::tabCloseRequested, m_tabWidget, &TabWidget::closeTab);
+    connect(ui->tabWidgetEditor, &QTabWidget::tabCloseRequested, ui->tabWidgetEditor, &TabWidgetEditor::closeTab);
 }
 
 MainWindow::~MainWindow()
@@ -27,9 +33,20 @@ void MainWindow::openFile()
             QFileInfo fileInfo(filePath);
             mCurrentDirectory = fileInfo.absolutePath();
             QString fileName = fileInfo.fileName();
-
-            m_tabWidget->addTabWithContent(m_controllerEditor.getFileContent(), fileName); // Ajouter un nouvel onglet avec le contenu et le nom du fichier
-            m_tabWidget->setTabModified(m_tabWidget->count() - 1, false);                 // Initialiser l'état modifié à false
+            if (m_initialTabWidget)
+            {
+                // Utilisation de votre méthode personnalisée pour ajouter un onglet
+                ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName);
+                ui->tabWidgetEditor->setTabToolTip(ui->tabWidgetEditor->count() - 1, filePath);
+                // Enlevez l'onglet initial
+                ui->tabWidgetEditor->removeTab(0);
+                m_initialTabWidget = false;
+            }
+            else
+            {
+                ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName);
+                ui->tabWidgetEditor->setTabToolTip(ui->tabWidgetEditor->count() - 1, filePath);
+            }
         }
         else
         {
@@ -37,22 +54,43 @@ void MainWindow::openFile()
         }
     }
 }
-
 void MainWindow::saveFile()
 {
     // Récupérer l'index de l'onglet actif dans le TabWidget
-    int activeTabIndex = m_tabWidget->currentIndex();
+    int activeTabIndex = ui->tabWidgetEditor->currentIndex();
     if (activeTabIndex != -1)
     {
-        QTextEdit *textEdit = qobject_cast<QTextEdit *>(m_tabWidget->widget(activeTabIndex));
+        QTextEdit *textEdit = qobject_cast<QTextEdit *>(ui->tabWidgetEditor->widget(activeTabIndex));
         if (textEdit)
         {
             QString content = textEdit->toPlainText();
-            QString filePath = mCurrentDirectory + "/" + m_tabWidget->tabToolTip(activeTabIndex);
+            QString filePath = ui->tabWidgetEditor->tabToolTip(activeTabIndex);  // Utilisez l'info-bulle comme chemin de fichier
+            // Vérifier si le chemin du fichier est valide
+            if (filePath.isEmpty() || !QFileInfo(filePath).isFile())
+            {
+                // Afficher une boîte de dialogue pour choisir où sauvegarder le fichier
+                filePath = QFileDialog::getSaveFileName(this, "Save File", mCurrentDirectory, "All Files (*)");
+                if (filePath.isEmpty())
+                {
+                    // L'utilisateur a annulé la boîte de dialogue de sauvegarde
+                    return;
+                }
+
+                // Mettre à jour le chemin du fichier dans l'onglet
+                ui->tabWidgetEditor->setTabToolTip(activeTabIndex, filePath);
+
+                // Mettre à jour le texte de l'onglet pour refléter le nouveau nom du fichier
+                QFileInfo fileInfo(filePath);
+                QString fileName = fileInfo.fileName();
+                ui->tabWidgetEditor->setTabText(activeTabIndex, fileName);
+            }
             if (m_controllerEditor.saveFile(filePath, content))
             {
-                m_tabWidget->setTabText(activeTabIndex, m_tabWidget->tabToolTip(activeTabIndex));
-                m_tabWidget->setCurrentTextEditModified(false);
+                QFileInfo fileInfo(filePath);
+                QString fileName = fileInfo.fileName();  // Extrait le nom du fichier à partir du chemin d'accès complet
+                ui->tabWidgetEditor->setTabText(activeTabIndex, fileName);  // Utilisez le nom du fichier pour le texte de l'onglet
+                ui->tabWidgetEditor->setCurrentTextEditModified(false);      // (Je suppose que cette méthode définit l'état 'modifié' de l'onglet actuel)
+
                 QMessageBox::information(this, "Success", "File saved successfully.");
             }
             else
@@ -62,3 +100,4 @@ void MainWindow::saveFile()
         }
     }
 }
+

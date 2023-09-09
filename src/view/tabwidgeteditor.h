@@ -1,5 +1,5 @@
-#ifndef TABWIDGET_H
-#define TABWIDGET_H
+#ifndef TABWIDGETEDITOR_H
+#define TABWIDGETEDITOR_H
 
 #include <QTabWidget>
 #include <QTextEdit>
@@ -12,18 +12,16 @@
 #include "customtextedit.h"
 
 
-
-class TabWidget : public QTabWidget
+class TabWidgetEditor : public QTabWidget
 {
     Q_OBJECT
 
 public:
-    explicit TabWidget(QWidget *parent = nullptr);
+    TabWidgetEditor(QWidget *parent = nullptr);
     void addTabWithContent(const QString &content, const QString &filePath);
     void setTabModified(int index, bool modified);
     void handleTextModified(bool modified);
     void setCurrentTextEditModified(bool modified);
-
 
 public slots:
     void closeTab(int index);
@@ -38,5 +36,4 @@ private:
     QString mCurrentDirectory = PathGlobal::getGlobalPath();
 };
 
-
-#endif // TABWIDGET_H
+#endif // TABWIDGETEDITOR_H
