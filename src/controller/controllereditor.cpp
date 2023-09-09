@@ -25,8 +25,11 @@ bool ControllerEditor::openFile(const QString &filePath)
 bool ControllerEditor::saveFile(const QString &filePath, const QString &content)
 {
     QFile file(filePath);
-    file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate);
-    QTextStream out(&file);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Failed to open file for writing: " << file.errorString();  // Diagnostic
+        return false;
+    }    QTextStream out(&file);
     out << content;
     file.close();
     return true;

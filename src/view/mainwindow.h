@@ -1,16 +1,18 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include <QFile>
 #include <QDebug>
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMessageBox>
-#include <ui_mainwindow.h>
-
+#include <QMainWindow>
 #include "../controller/controllereditor.h"
 #include "../filemanagement/pathglobal.h"
 
-#include "tabwidget.h"
+#include "tabwidgeteditor.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -33,7 +35,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     ControllerEditor m_controllerEditor;
-    TabWidget *m_tabWidget;
+    bool m_initialTabWidget;
     QString mCurrentDirectory = PathGlobal::getGlobalPath();
 };
 #endif // MAINWINDOW_H

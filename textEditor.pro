@@ -13,9 +13,9 @@ SOURCES += \
     src/controller/controllereditor.cpp \
     src/filemanagement/pathglobal.cpp \
     src/view/customtextedit.cpp \
-    src/view/tabwidget.cpp \
     src/view/mainwindow.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/view/tabwidgeteditor.cpp
 
 HEADERS += \
     src/filemanagement/filemanager.h \
@@ -23,10 +23,12 @@ HEADERS += \
     src/filemanagement/pathglobal.h \
     src/view/customtextedit.h \
     src/view/mainwindow.h \
-    src/view/tabwidget.h
+    src/view/tabwidgeteditor.h
 
 FORMS += \
     mainwindow.ui
+
+INCLUDEPATH += $$PWD/src/view
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

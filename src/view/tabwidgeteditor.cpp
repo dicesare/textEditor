@@ -1,33 +1,26 @@
-// tabwidget.cpp
-#include "tabwidget.h"
+#include "tabwidgeteditor.h"
 
-TabWidget::TabWidget(QWidget *parent) : QTabWidget(parent)
+TabWidgetEditor::TabWidgetEditor(QWidget *parent) : QTabWidget(parent)
 {
-    connect(this, &QTabWidget::tabCloseRequested, this, &TabWidget::closeTab);
+    m_modifiedTabs.append(false);
+    connect(this, &QTabWidget::tabCloseRequested, this, &TabWidgetEditor::closeTab);
 }
 
-void TabWidget::addTabWithContent(const QString &content, const QString &filePath)
+void TabWidgetEditor::addTabWithContent(const QString &content, const QString &filePath)
 {
     CustomTextEdit *textEditor = new CustomTextEdit(this);
-    textEditor->setText(content);
-
-    int newIndex = addTab(textEditor, filePath);
-    // Activer l'option "tabsClosable" pour cet onglet
-    setTabsClosable(true);
-    // Définir le tooltip de l'onglet sur le chemin du fichier
-    setTabToolTip(newIndex, filePath);
-    // Définir le texte de l'onglet sur le nom du fichier
-    setCurrentIndex(newIndex);
+    int index = addTab(textEditor, filePath);
     m_currentTextEdit = textEditor;
+    textEditor->setPlainText(content);
+    // textEditor->setIsModified(false);
 
-    // Connectez le signal textModified au slot handleTextModified
-    connect(textEditor, &CustomTextEdit::textModified, this, &TabWidget::handleTextModified);
-
-    // Initialiser l'état modifié à false pour le nouvel onglet
+    setTabsClosable(true);
+    setCurrentIndex(index);
+    setTabToolTip(index, filePath);
+    connect(textEditor, &CustomTextEdit::textModified, this, &TabWidgetEditor::handleTextModified);
     m_modifiedTabs.append(false);
 }
-
-void TabWidget::closeTab(int index)
+void TabWidgetEditor::closeTab(int index)
 {
     if (index >= 0 && index < count())
     {
@@ -71,7 +64,7 @@ void TabWidget::closeTab(int index)
     }
 }
 
-void TabWidget::setTabModified(int index, bool modified)
+void TabWidgetEditor::setTabModified(int index, bool modified)
 {
     if (index >= 0 && index < m_modifiedTabs.size())
     {
@@ -80,7 +73,7 @@ void TabWidget::setTabModified(int index, bool modified)
     }
 }
 
-void TabWidget::handleTextModified(bool modified)
+void TabWidgetEditor::handleTextModified(bool modified)
 {
     int currentTabIndex = this->currentIndex();
     if (currentTabIndex != -1)
@@ -111,7 +104,7 @@ void TabWidget::handleTextModified(bool modified)
     }
 }
 
-void TabWidget::setCurrentTextEditModified(bool modified)
+void TabWidgetEditor::setCurrentTextEditModified(bool modified)
 {
     if (m_currentTextEdit)
     {
