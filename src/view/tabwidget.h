@@ -22,6 +22,8 @@ public:
     void addTabWithContent(const QString &content, const QString &filePath);
     void setTabModified(int index, bool modified);
     void handleTextModified(bool modified);
+    void setCurrentTextEditModified(bool modified);
+
 
 public slots:
     void closeTab(int index);

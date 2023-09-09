@@ -14,6 +14,11 @@ bool CustomTextEdit::isTextChanged() const
     return m_isModified;
 }
 
+void CustomTextEdit::setIsModified(bool modified)
+{
+    m_isModified = modified;
+}
+
 void CustomTextEdit::onTextChanged()
 {
     // Comparer le texte actuel avec le texte précédent pour déterminer s'il a vraiment changé

@@ -65,7 +65,6 @@ void TabWidget::closeTab(int index)
             QWidget *widgetToRemove = widget(index);
             removeTab(index);
             delete widgetToRemove;
-
             // Retirer l'état modifié de l'onglet supprimé du QVector
             m_modifiedTabs.remove(index);
         }
@@ -109,5 +108,13 @@ void TabWidget::handleTextModified(bool modified)
                 }
             }
         }
+    }
+}
+
+void TabWidget::setCurrentTextEditModified(bool modified)
+{
+    if (m_currentTextEdit)
+    {
+        m_currentTextEdit->setIsModified(modified);
     }
 }
