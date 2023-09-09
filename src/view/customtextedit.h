@@ -11,6 +11,7 @@ class CustomTextEdit : public QTextEdit
 public:
     CustomTextEdit(QWidget *parent = nullptr);
     bool isTextChanged() const;
+    void setIsModified(bool modified);
 
 signals:
     void textModified(bool modified);

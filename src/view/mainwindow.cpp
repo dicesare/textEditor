@@ -52,6 +52,7 @@ void MainWindow::saveFile()
             if (m_controllerEditor.saveFile(filePath, content))
             {
                 m_tabWidget->setTabText(activeTabIndex, m_tabWidget->tabToolTip(activeTabIndex));
+                m_tabWidget->setCurrentTextEditModified(false);
                 QMessageBox::information(this, "Success", "File saved successfully.");
             }
             else
