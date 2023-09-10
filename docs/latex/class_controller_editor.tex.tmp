@@ -1,0 +1,163 @@
+\hypertarget{class_controller_editor}{}\doxysection{Controller\+Editor Class Reference}
+\label{class_controller_editor}\index{ControllerEditor@{ControllerEditor}}
+
+
+A class that manages the text editor.  
+
+
+
+
+{\ttfamily \#include $<$controllereditor.\+h$>$}
+
+
+
+Inheritance diagram for Controller\+Editor\+:
+% FIG 0
+
+
+Collaboration diagram for Controller\+Editor\+:
+% FIG 1
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+Q\+\_\+\+INVOKABLE bool \mbox{\hyperlink{class_controller_editor_a2e8cdc14791497e4dfff2cb753e37fc2}{open\+File}} (const QString \&file\+Path)
+\begin{DoxyCompactList}\small\item\em Open a file. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE bool \mbox{\hyperlink{class_controller_editor_adc251e8a68f941a57166b3b3a5d0a9b2}{save\+File}} (const QString \&file\+Path, const QString \&content)
+\begin{DoxyCompactList}\small\item\em Save a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_controller_editor_a98704e0c6b51463abfae1bb80445aeb5}{file\+Content\+Changed}} (const QString \&content)
+\begin{DoxyCompactList}\small\item\em Signal emitted when the file content has changed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_controller_editor_aee360c9a1c99c63f82d38107a4ace55a}{Controller\+Editor}} (QObject $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_controller_editor_a2ee044ee8112d66686acfbe54b0592b9}{get\+File\+Content}} () const
+\begin{DoxyCompactList}\small\item\em Retrieve the file content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_editor_a90b68e8f0417d3cab7b508d2a8efc82b}{set\+File\+Content}} (const QString \&content)
+\begin{DoxyCompactList}\small\item\em Set the file content. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that manages the text editor. 
+
+This class is responsible for managing the text editor. It is used to open and save files. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_controller_editor_aee360c9a1c99c63f82d38107a4ace55a}\label{class_controller_editor_aee360c9a1c99c63f82d38107a4ace55a}} 
+\index{ControllerEditor@{ControllerEditor}!ControllerEditor@{ControllerEditor}}
+\index{ControllerEditor@{ControllerEditor}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{ControllerEditor()}{ControllerEditor()}}
+{\footnotesize\ttfamily Controller\+Editor\+::\+Controller\+Editor (\begin{DoxyParamCaption}\item[{QObject $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Default constructor. 
+
+Initializes a new instance of the \mbox{\hyperlink{class_controller_editor}{Controller\+Editor}} class.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent object. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controller_editor_a98704e0c6b51463abfae1bb80445aeb5}\label{class_controller_editor_a98704e0c6b51463abfae1bb80445aeb5}} 
+\index{ControllerEditor@{ControllerEditor}!fileContentChanged@{fileContentChanged}}
+\index{fileContentChanged@{fileContentChanged}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{fileContentChanged}{fileContentChanged}}
+{\footnotesize\ttfamily void Controller\+Editor\+::file\+Content\+Changed (\begin{DoxyParamCaption}\item[{const QString \&}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal emitted when the file content has changed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & The new content of the file. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_controller_editor_a2ee044ee8112d66686acfbe54b0592b9}\label{class_controller_editor_a2ee044ee8112d66686acfbe54b0592b9}} 
+\index{ControllerEditor@{ControllerEditor}!getFileContent@{getFileContent}}
+\index{getFileContent@{getFileContent}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{getFileContent()}{getFileContent()}}
+{\footnotesize\ttfamily QString Controller\+Editor\+::get\+File\+Content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrieve the file content. 
+
+This method returns the content of the file that is currently opened.
+
+\begin{DoxyReturn}{Returns}
+The content of the file that is currently opened. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controller_editor_a2e8cdc14791497e4dfff2cb753e37fc2}\label{class_controller_editor_a2e8cdc14791497e4dfff2cb753e37fc2}} 
+\index{ControllerEditor@{ControllerEditor}!openFile@{openFile}}
+\index{openFile@{openFile}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{openFile}{openFile}}
+{\footnotesize\ttfamily bool Controller\+Editor\+::open\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Open a file. 
+
+This method opens a file and returns its content.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to open. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file was opened successfully, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controller_editor_adc251e8a68f941a57166b3b3a5d0a9b2}\label{class_controller_editor_adc251e8a68f941a57166b3b3a5d0a9b2}} 
+\index{ControllerEditor@{ControllerEditor}!saveFile@{saveFile}}
+\index{saveFile@{saveFile}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{saveFile}{saveFile}}
+{\footnotesize\ttfamily bool Controller\+Editor\+::save\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Path,  }\item[{const QString \&}]{content }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Save a file. 
+
+This method saves a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path to the file to save. \\
+\hline
+{\em content} & The content to save. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the file was saved successfully, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_controller_editor_a90b68e8f0417d3cab7b508d2a8efc82b}\label{class_controller_editor_a90b68e8f0417d3cab7b508d2a8efc82b}} 
+\index{ControllerEditor@{ControllerEditor}!setFileContent@{setFileContent}}
+\index{setFileContent@{setFileContent}!ControllerEditor@{ControllerEditor}}
+\doxysubsubsection{\texorpdfstring{setFileContent()}{setFileContent()}}
+{\footnotesize\ttfamily void Controller\+Editor\+::set\+File\+Content (\begin{DoxyParamCaption}\item[{const QString \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Set the file content. 
+
+This method sets the content of the file that is currently opened.
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & The content of the file that is currently opened. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/controllereditor.\+h\item 
+src/controller/controllereditor.\+cpp\end{DoxyCompactItemize}

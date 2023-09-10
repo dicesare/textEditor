@@ -39,6 +39,48 @@ Text Editor is a simple yet feature-rich text editing application built using C+
 - Doxygen (for code documentation)
 
 ---
+## Documentation
+
+La documentation du code est générée avec Doxygen. Voici comment générer et consulter la documentation.
+
+### Installation de Doxygen
+
+Si vous utilisez Ubuntu, vous pouvez installer Doxygen en utilisant la commande suivante :
+
+\`\`\`bash
+sudo apt-get install doxygen
+\`\`\`
+
+### Générer la Documentation
+
+1. Placez-vous à la racine du projet où se trouve le fichier `Doxyfile`.
+2. Exécutez la commande suivante :
+
+\`\`\`bash
+doxygen Doxyfile
+\`\`\`
+
+Cela générera la documentation dans le répertoire que vous aurez spécifié dans le champ `OUTPUT_DIRECTORY` de votre fichier `Doxyfile`.
+
+### Lire la Documentation
+
+#### Documentation HTML
+
+1. Accédez au répertoire contenant la documentation (généralement un sous-dossier nommé `html`).
+2. Ouvrez le fichier `index.html` avec votre navigateur web.
+
+#### Documentation LaTeX
+
+1. Accédez au répertoire contenant la documentation LaTeX (généralement un sous-dossier nommé `latex`).
+2. Utilisez un éditeur LaTeX pour compiler les fichiers en PDF ou exécutez `pdflatex` en ligne de commande.
+
+### Utilisation de Doxywizard
+
+Si vous préférez utiliser une interface graphique :
+
+1. Ouvrez Doxywizard.
+2. Utilisez l'option "Fichier > Ouvrir..." pour ouvrir un fichier `Doxyfile` existant.
+3. Cliquez sur "Run doxygen" pour générer la documentation.
 
 ## Getting Started
 

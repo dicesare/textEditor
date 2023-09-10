@@ -1,0 +1,71 @@
+\hypertarget{mainwindow_8h_source}{}\doxysection{mainwindow.\+h}
+\label{mainwindow_8h_source}\index{src/view/mainwindow.h@{src/view/mainwindow.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef MAINWINDOW\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define MAINWINDOW\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QFile>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QDebug>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QFileDialog>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QMainWindow>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <QSettings>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <QListWidget>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}../controller/controllereditor.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../filemanagement/pathglobal.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}ui\_mainwindow.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}tabwidgeteditor.h"{}}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 QT\_BEGIN\_NAMESPACE}
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }Ui}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20     \textcolor{keyword}{class }\mbox{\hyperlink{class_main_window}{MainWindow}};}
+\DoxyCodeLine{21 \}}
+\DoxyCodeLine{22 QT\_END\_NAMESPACE}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{30 \textcolor{keyword}{class }\mbox{\hyperlink{class_main_window}{MainWindow}} : \textcolor{keyword}{public} QMainWindow}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32     Q\_OBJECT}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{keyword}{public}:}
+\DoxyCodeLine{35     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_main_window}{MainWindow}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{36     \mbox{\hyperlink{class_main_window}{\string~MainWindow}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     QString getCurrentDirectory() \textcolor{keyword}{const};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_main_window_a3625d92879c69bc104abdd7bf1d12042}{updateCursorPosition}}(\mbox{\hyperlink{class_custom_text_edit}{CustomTextEdit}} *editor);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_main_window_a7ed6e71b351852330c19caa0fa501a7b}{openSelectedFile}}(QListWidgetItem* item);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{57     \textcolor{keywordtype}{void} openFile();}
+\DoxyCodeLine{58     \textcolor{keywordtype}{void} saveFile();}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} onSaveAsTriggered();}
+\DoxyCodeLine{60     \textcolor{keywordtype}{void} pushButtonFind\_clicked();}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} pushButtonPrevious\_clicked();}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} pushButtonNext\_clicked();}
+\DoxyCodeLine{63     \textcolor{keywordtype}{void} pushButtonReplace\_clicked();}
+\DoxyCodeLine{64     \textcolor{keywordtype}{void} loadRecentFiles();}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} openRecentFile(\textcolor{keyword}{const} QString \&filePath);}
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} openSelectedFileFromButton();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 \textcolor{keyword}{private}:}
+\DoxyCodeLine{69     Ui::MainWindow *ui; }
+\DoxyCodeLine{70     \mbox{\hyperlink{class_controller_editor}{ControllerEditor}} m\_controllerEditor; }
+\DoxyCodeLine{71     \textcolor{keywordtype}{bool} m\_initialTabWidget; }
+\DoxyCodeLine{72     QString mCurrentDirectory = \mbox{\hyperlink{class_path_global_a76db82bddf7b3791adf34a52ed0de1ca}{PathGlobal::getGlobalPath}}(); }
+\DoxyCodeLine{73     QTextCursor m\_lastFoundCursor; }
+\DoxyCodeLine{74     QStringList m\_recentFiles; }
+\DoxyCodeLine{75     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} MaxRecentFiles = 10; }
+\DoxyCodeLine{76     QSettings m\_settings; }
+\DoxyCodeLine{77     \textcolor{keywordtype}{bool} m\_shouldShowSaveDialog = \textcolor{keyword}{false}; }
+\DoxyCodeLine{78     \textcolor{keywordtype}{bool} m\_actionSaveAsTriggered = \textcolor{keyword}{false}; }
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// MAINWINDOW\_H}}
+
+\end{DoxyCode}

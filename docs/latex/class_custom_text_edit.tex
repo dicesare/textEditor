@@ -1,0 +1,108 @@
+\hypertarget{class_custom_text_edit}{}\doxysection{Custom\+Text\+Edit Class Reference}
+\label{class_custom_text_edit}\index{CustomTextEdit@{CustomTextEdit}}
+
+
+Represents a custom text editor widget.  
+
+
+
+
+{\ttfamily \#include $<$customtextedit.\+h$>$}
+
+
+
+Inheritance diagram for Custom\+Text\+Edit\+:
+% FIG 0
+
+
+Collaboration diagram for Custom\+Text\+Edit\+:
+% FIG 1
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_custom_text_edit_a870fd6a000abc742fb3c725d1d9efc1d}{text\+Modified}} (bool modified)
+\begin{DoxyCompactList}\small\item\em Emitted when the text is modified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_custom_text_edit_a18556a723c91a01bd82d10c1cf41d325}{Custom\+Text\+Edit}} (QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} instance. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_custom_text_edit_a2a8c7fa470b1ab206c886b5d7e58df3c}{is\+Text\+Changed}} () const
+\begin{DoxyCompactList}\small\item\em Checks whether the text has been modified. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_custom_text_edit_ac63317a230287489475eb42d9ba22ce9}{set\+Is\+Modified}} (bool modified)
+\begin{DoxyCompactList}\small\item\em Sets the modified state of the text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a custom text editor widget. 
+
+The \mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} class extends QText\+Edit to provide custom behavior for text modification detection. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_custom_text_edit_a18556a723c91a01bd82d10c1cf41d325}\label{class_custom_text_edit_a18556a723c91a01bd82d10c1cf41d325}} 
+\index{CustomTextEdit@{CustomTextEdit}!CustomTextEdit@{CustomTextEdit}}
+\index{CustomTextEdit@{CustomTextEdit}!CustomTextEdit@{CustomTextEdit}}
+\doxysubsubsection{\texorpdfstring{CustomTextEdit()}{CustomTextEdit()}}
+{\footnotesize\ttfamily Custom\+Text\+Edit\+::\+Custom\+Text\+Edit (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent widget. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_custom_text_edit_a2a8c7fa470b1ab206c886b5d7e58df3c}\label{class_custom_text_edit_a2a8c7fa470b1ab206c886b5d7e58df3c}} 
+\index{CustomTextEdit@{CustomTextEdit}!isTextChanged@{isTextChanged}}
+\index{isTextChanged@{isTextChanged}!CustomTextEdit@{CustomTextEdit}}
+\doxysubsubsection{\texorpdfstring{isTextChanged()}{isTextChanged()}}
+{\footnotesize\ttfamily bool Custom\+Text\+Edit\+::is\+Text\+Changed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Checks whether the text has been modified. 
+
+\begin{DoxyReturn}{Returns}
+True if the text has been modified, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_custom_text_edit_ac63317a230287489475eb42d9ba22ce9}\label{class_custom_text_edit_ac63317a230287489475eb42d9ba22ce9}} 
+\index{CustomTextEdit@{CustomTextEdit}!setIsModified@{setIsModified}}
+\index{setIsModified@{setIsModified}!CustomTextEdit@{CustomTextEdit}}
+\doxysubsubsection{\texorpdfstring{setIsModified()}{setIsModified()}}
+{\footnotesize\ttfamily void Custom\+Text\+Edit\+::set\+Is\+Modified (\begin{DoxyParamCaption}\item[{bool}]{modified }\end{DoxyParamCaption})}
+
+
+
+Sets the modified state of the text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the text is considered modified. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_custom_text_edit_a870fd6a000abc742fb3c725d1d9efc1d}\label{class_custom_text_edit_a870fd6a000abc742fb3c725d1d9efc1d}} 
+\index{CustomTextEdit@{CustomTextEdit}!textModified@{textModified}}
+\index{textModified@{textModified}!CustomTextEdit@{CustomTextEdit}}
+\doxysubsubsection{\texorpdfstring{textModified}{textModified}}
+{\footnotesize\ttfamily void Custom\+Text\+Edit\+::text\+Modified (\begin{DoxyParamCaption}\item[{bool}]{modified }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Emitted when the text is modified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & The new modified state of the text. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/view/customtextedit.\+h\item 
+src/view/customtextedit.\+cpp\end{DoxyCompactItemize}

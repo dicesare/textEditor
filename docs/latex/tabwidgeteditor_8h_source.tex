@@ -1,0 +1,50 @@
+\hypertarget{tabwidgeteditor_8h_source}{}\doxysection{tabwidgeteditor.\+h}
+\label{tabwidgeteditor_8h_source}\index{src/view/tabwidgeteditor.h@{src/view/tabwidgeteditor.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TABWIDGETEDITOR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TABWIDGETEDITOR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QTabWidget>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QTextEdit>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <QMessageBox>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <QFileDialog>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <QVector>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../controller/controllereditor.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}../filemanagement/pathglobal.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}customtextedit.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{21 \textcolor{keyword}{class }\mbox{\hyperlink{class_tab_widget_editor}{TabWidgetEditor}} : \textcolor{keyword}{public} QTabWidget}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23     Q\_OBJECT}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_tab_widget_editor_aa8c1749dd170463baa8798e1c8c36837}{TabWidgetEditor}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_abeaac85d436ac367ee5266953635a17b}{addTabWithContent}}(\textcolor{keyword}{const} QString \&content, \textcolor{keyword}{const} QString \&filePath);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_a8f7ec432c61260d88f777cb5967f88df}{setTabModified}}(\textcolor{keywordtype}{int} index, \textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_a1a6522f538ec48048e9834348df9b327}{handleTextModified}}(\textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_abddf4f9cf8d1110299606b809774ff40}{setCurrentTextEditModified}}(\textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{69     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_a3d7e41f6028711f95cc1fdcab31c35db}{closeTab}}(\textcolor{keywordtype}{int} index);}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71 signals:}
+\DoxyCodeLine{77     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_a6c018ba72607a6c6b2dda2e2d524d5c3}{cursorPositionChangedInEditor}}(\mbox{\hyperlink{class_custom_text_edit}{CustomTextEdit}} *editor);}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{84     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_tab_widget_editor_a9bcda54b68673bc676f26cfc559f65ea}{fileModified}}(\textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 \textcolor{keyword}{private}:}
+\DoxyCodeLine{87     \mbox{\hyperlink{class_controller_editor}{ControllerEditor}} m\_controllerEditor; }
+\DoxyCodeLine{88     QVector<bool> m\_modifiedTabs; }
+\DoxyCodeLine{89     \mbox{\hyperlink{class_custom_text_edit}{CustomTextEdit}} *m\_currentTextEdit; }
+\DoxyCodeLine{90     QString mCurrentDirectory = \mbox{\hyperlink{class_path_global_a76db82bddf7b3791adf34a52ed0de1ca}{PathGlobal::getGlobalPath}}(); }
+\DoxyCodeLine{91 \};}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// TABWIDGETEDITOR\_H}}
+
+\end{DoxyCode}

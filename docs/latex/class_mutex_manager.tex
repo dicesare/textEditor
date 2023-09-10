@@ -1,0 +1,45 @@
+\hypertarget{class_mutex_manager}{}\doxysection{Mutex\+Manager Class Reference}
+\label{class_mutex_manager}\index{MutexManager@{MutexManager}}
+
+
+Singleton class responsible for mutex management.  
+
+
+
+
+{\ttfamily \#include $<$mutexmanager.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static QMutex \& \mbox{\hyperlink{class_mutex_manager_a57ade4ec3f6657595bc0e67c98116f58}{get\+Mutex}} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the mutex instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton class responsible for mutex management. 
+
+The \mbox{\hyperlink{class_mutex_manager}{Mutex\+Manager}} class serves as a singleton that provides a QMutex instance for managing synchronization locks. This ensures a centralized control of mutex operations. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mutex_manager_a57ade4ec3f6657595bc0e67c98116f58}\label{class_mutex_manager_a57ade4ec3f6657595bc0e67c98116f58}} 
+\index{MutexManager@{MutexManager}!getMutex@{getMutex}}
+\index{getMutex@{getMutex}!MutexManager@{MutexManager}}
+\doxysubsubsection{\texorpdfstring{getMutex()}{getMutex()}}
+{\footnotesize\ttfamily QMutex \& Mutex\+Manager\+::get\+Mutex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Retrieve the mutex instance. 
+
+This static method returns a reference to the QMutex instance that is controlled by this class.
+
+\begin{DoxyReturn}{Returns}
+A reference to the managed QMutex instance. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/mutexmanager.\+h\item 
+src/mutexmanager.\+cpp\end{DoxyCompactItemize}

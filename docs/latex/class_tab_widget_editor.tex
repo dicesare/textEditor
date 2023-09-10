@@ -1,0 +1,185 @@
+\hypertarget{class_tab_widget_editor}{}\doxysection{Tab\+Widget\+Editor Class Reference}
+\label{class_tab_widget_editor}\index{TabWidgetEditor@{TabWidgetEditor}}
+
+
+A class that manages the tab-\/based text editor interface.  
+
+
+
+
+{\ttfamily \#include $<$tabwidgeteditor.\+h$>$}
+
+
+
+Inheritance diagram for Tab\+Widget\+Editor\+:
+% FIG 0
+
+
+Collaboration diagram for Tab\+Widget\+Editor\+:
+% FIG 1
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_tab_widget_editor_a3d7e41f6028711f95cc1fdcab31c35db}{close\+Tab}} (int index)
+\begin{DoxyCompactList}\small\item\em Close the tab at the given index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_tab_widget_editor_a6c018ba72607a6c6b2dda2e2d524d5c3}{cursor\+Position\+Changed\+In\+Editor}} (\mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} $\ast$editor)
+\begin{DoxyCompactList}\small\item\em Signal emitted when the cursor\textquotesingle{}s position changes in the editor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tab_widget_editor_a9bcda54b68673bc676f26cfc559f65ea}{file\+Modified}} (bool modified)
+\begin{DoxyCompactList}\small\item\em Signal emitted when a file gets modified. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tab_widget_editor_aa8c1749dd170463baa8798e1c8c36837}{Tab\+Widget\+Editor}} (QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor that initializes the tab widget. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tab_widget_editor_abeaac85d436ac367ee5266953635a17b}{add\+Tab\+With\+Content}} (const QString \&content, const QString \&file\+Path)
+\begin{DoxyCompactList}\small\item\em Adds a new tab and populate it with given content and filepath. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tab_widget_editor_a8f7ec432c61260d88f777cb5967f88df}{set\+Tab\+Modified}} (int index, bool modified)
+\begin{DoxyCompactList}\small\item\em Set the modified state for a tab at given index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tab_widget_editor_a1a6522f538ec48048e9834348df9b327}{handle\+Text\+Modified}} (bool modified)
+\begin{DoxyCompactList}\small\item\em Responds to text modification events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tab_widget_editor_abddf4f9cf8d1110299606b809774ff40}{set\+Current\+Text\+Edit\+Modified}} (bool modified)
+\begin{DoxyCompactList}\small\item\em Sets the modified state for the current QText\+Edit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that manages the tab-\/based text editor interface. 
+
+This class inherits from QTab\+Widget and controls the tabbed interface where each tab represents an open text file. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_tab_widget_editor_aa8c1749dd170463baa8798e1c8c36837}\label{class_tab_widget_editor_aa8c1749dd170463baa8798e1c8c36837}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!TabWidgetEditor@{TabWidgetEditor}}
+\index{TabWidgetEditor@{TabWidgetEditor}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{TabWidgetEditor()}{TabWidgetEditor()}}
+{\footnotesize\ttfamily Tab\+Widget\+Editor\+::\+Tab\+Widget\+Editor (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor that initializes the tab widget. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent widget. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tab_widget_editor_abeaac85d436ac367ee5266953635a17b}\label{class_tab_widget_editor_abeaac85d436ac367ee5266953635a17b}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!addTabWithContent@{addTabWithContent}}
+\index{addTabWithContent@{addTabWithContent}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{addTabWithContent()}{addTabWithContent()}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::add\+Tab\+With\+Content (\begin{DoxyParamCaption}\item[{const QString \&}]{content,  }\item[{const QString \&}]{file\+Path }\end{DoxyParamCaption})}
+
+
+
+Adds a new tab and populate it with given content and filepath. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & Content to fill in the new tab. \\
+\hline
+{\em file\+Path} & Filepath to associate with the new tab. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_a3d7e41f6028711f95cc1fdcab31c35db}\label{class_tab_widget_editor_a3d7e41f6028711f95cc1fdcab31c35db}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!closeTab@{closeTab}}
+\index{closeTab@{closeTab}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{closeTab}{closeTab}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::close\+Tab (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Close the tab at the given index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the tab. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_a6c018ba72607a6c6b2dda2e2d524d5c3}\label{class_tab_widget_editor_a6c018ba72607a6c6b2dda2e2d524d5c3}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!cursorPositionChangedInEditor@{cursorPositionChangedInEditor}}
+\index{cursorPositionChangedInEditor@{cursorPositionChangedInEditor}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{cursorPositionChangedInEditor}{cursorPositionChangedInEditor}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::cursor\+Position\+Changed\+In\+Editor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} $\ast$}]{editor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal emitted when the cursor\textquotesingle{}s position changes in the editor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em editor} & Pointer to the \mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} where the event occurred. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_a9bcda54b68673bc676f26cfc559f65ea}\label{class_tab_widget_editor_a9bcda54b68673bc676f26cfc559f65ea}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!fileModified@{fileModified}}
+\index{fileModified@{fileModified}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{fileModified}{fileModified}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::file\+Modified (\begin{DoxyParamCaption}\item[{bool}]{modified }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal emitted when a file gets modified. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the file is modified or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_a1a6522f538ec48048e9834348df9b327}\label{class_tab_widget_editor_a1a6522f538ec48048e9834348df9b327}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!handleTextModified@{handleTextModified}}
+\index{handleTextModified@{handleTextModified}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{handleTextModified()}{handleTextModified()}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::handle\+Text\+Modified (\begin{DoxyParamCaption}\item[{bool}]{modified }\end{DoxyParamCaption})}
+
+
+
+Responds to text modification events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the text is modified or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_abddf4f9cf8d1110299606b809774ff40}\label{class_tab_widget_editor_abddf4f9cf8d1110299606b809774ff40}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!setCurrentTextEditModified@{setCurrentTextEditModified}}
+\index{setCurrentTextEditModified@{setCurrentTextEditModified}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{setCurrentTextEditModified()}{setCurrentTextEditModified()}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::set\+Current\+Text\+Edit\+Modified (\begin{DoxyParamCaption}\item[{bool}]{modified }\end{DoxyParamCaption})}
+
+
+
+Sets the modified state for the current QText\+Edit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the text is modified or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_tab_widget_editor_a8f7ec432c61260d88f777cb5967f88df}\label{class_tab_widget_editor_a8f7ec432c61260d88f777cb5967f88df}} 
+\index{TabWidgetEditor@{TabWidgetEditor}!setTabModified@{setTabModified}}
+\index{setTabModified@{setTabModified}!TabWidgetEditor@{TabWidgetEditor}}
+\doxysubsubsection{\texorpdfstring{setTabModified()}{setTabModified()}}
+{\footnotesize\ttfamily void Tab\+Widget\+Editor\+::set\+Tab\+Modified (\begin{DoxyParamCaption}\item[{int}]{index,  }\item[{bool}]{modified }\end{DoxyParamCaption})}
+
+
+
+Set the modified state for a tab at given index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index of the tab. \\
+\hline
+{\em modified} & Whether the tab is modified or not. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/view/tabwidgeteditor.\+h\item 
+src/view/tabwidgeteditor.\+cpp\end{DoxyCompactItemize}
