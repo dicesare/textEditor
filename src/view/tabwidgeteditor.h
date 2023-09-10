@@ -17,7 +17,7 @@ class TabWidgetEditor : public QTabWidget
     Q_OBJECT
 
 public:
-    TabWidgetEditor(QWidget *parent = nullptr);
+    explicit TabWidgetEditor(QWidget *parent = nullptr);
     void addTabWithContent(const QString &content, const QString &filePath);
     void setTabModified(int index, bool modified);
     void handleTextModified(bool modified);
@@ -27,6 +27,7 @@ public slots:
     void closeTab(int index);
 
 signals:
+    void cursorPositionChangedInEditor(CustomTextEdit *editor);
     void fileModified (bool modified);
 
 private:
