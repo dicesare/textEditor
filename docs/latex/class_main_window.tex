@@ -1,0 +1,79 @@
+\hypertarget{class_main_window}{}\doxysection{Main\+Window Class Reference}
+\label{class_main_window}\index{MainWindow@{MainWindow}}
+
+
+Represents the main application window.  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+
+
+Inheritance diagram for Main\+Window\+:
+% FIG 0
+
+
+Collaboration diagram for Main\+Window\+:
+% FIG 1
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_main_window_a3625d92879c69bc104abdd7bf1d12042}{update\+Cursor\+Position}} (\mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} $\ast$editor)
+\begin{DoxyCompactList}\small\item\em Responds to text modification events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a7ed6e71b351852330c19caa0fa501a7b}{open\+Selected\+File}} (QList\+Widget\+Item $\ast$item)
+\begin{DoxyCompactList}\small\item\em Responds to text modification events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_main_window_a996c5a2b6f77944776856f08ec30858d}\label{class_main_window_a996c5a2b6f77944776856f08ec30858d}} 
+{\bfseries Main\+Window} (QWidget $\ast$parent=nullptr)
+\item 
+\mbox{\Hypertarget{class_main_window_a5710753019dbf16dcc8203c826ced8f8}\label{class_main_window_a5710753019dbf16dcc8203c826ced8f8}} 
+QString {\bfseries get\+Current\+Directory} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the main application window. 
+
+This class is responsible for the initialization and management of the main application window. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_main_window_a7ed6e71b351852330c19caa0fa501a7b}\label{class_main_window_a7ed6e71b351852330c19caa0fa501a7b}} 
+\index{MainWindow@{MainWindow}!openSelectedFile@{openSelectedFile}}
+\index{openSelectedFile@{openSelectedFile}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{openSelectedFile}{openSelectedFile}}
+{\footnotesize\ttfamily void Main\+Window\+::open\+Selected\+File (\begin{DoxyParamCaption}\item[{QList\+Widget\+Item $\ast$}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Responds to text modification events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the text is modified or not. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a3625d92879c69bc104abdd7bf1d12042}\label{class_main_window_a3625d92879c69bc104abdd7bf1d12042}} 
+\index{MainWindow@{MainWindow}!updateCursorPosition@{updateCursorPosition}}
+\index{updateCursorPosition@{updateCursorPosition}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{updateCursorPosition}{updateCursorPosition}}
+{\footnotesize\ttfamily void Main\+Window\+::update\+Cursor\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_custom_text_edit}{Custom\+Text\+Edit}} $\ast$}]{editor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Responds to text modification events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em modified} & Whether the text is modified or not. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/view/mainwindow.\+h\item 
+src/view/mainwindow.\+cpp\end{DoxyCompactItemize}

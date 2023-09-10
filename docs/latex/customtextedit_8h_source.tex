@@ -1,0 +1,38 @@
+\hypertarget{customtextedit_8h_source}{}\doxysection{customtextedit.\+h}
+\label{customtextedit_8h_source}\index{src/view/customtextedit.h@{src/view/customtextedit.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CUSTOMTEXTEDIT\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CUSTOMTEXTEDIT\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QTextEdit>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QDebug>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_custom_text_edit}{CustomTextEdit}} : \textcolor{keyword}{public} QTextEdit}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     Q\_OBJECT}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{24     \mbox{\hyperlink{class_custom_text_edit_a18556a723c91a01bd82d10c1cf41d325}{CustomTextEdit}}(QWidget *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_custom_text_edit_a2a8c7fa470b1ab206c886b5d7e58df3c}{isTextChanged}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_custom_text_edit_ac63317a230287489475eb42d9ba22ce9}{setIsModified}}(\textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 signals:}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{47     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_custom_text_edit_a870fd6a000abc742fb3c725d1d9efc1d}{textModified}}(\textcolor{keywordtype}{bool} modified);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49 \textcolor{keyword}{private} slots:}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} onTextChanged();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{keyword}{private}:}
+\DoxyCodeLine{57     \textcolor{keywordtype}{bool} m\_isModified = \textcolor{keyword}{false};          }
+\DoxyCodeLine{58     QString m\_previousText;    }
+\DoxyCodeLine{59 \};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CUSTOMTEXTEDIT\_H}}
+
+\end{DoxyCode}

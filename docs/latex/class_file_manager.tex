@@ -1,0 +1,95 @@
+\hypertarget{class_file_manager}{}\doxysection{File\+Manager Class Reference}
+\label{class_file_manager}\index{FileManager@{FileManager}}
+
+
+Class responsible for file management.  
+
+
+
+
+{\ttfamily \#include $<$filemanager.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_file_manager_a8afd512c06be9daf140cc19d71f9b391}{File\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_file_manager_a001e45a574f07a73e84a5d646b667195}{read\+File}} (const QString \&file\+Path, QString \&content)
+\begin{DoxyCompactList}\small\item\em Reads a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_file_manager_a6878ff3149c434dd8312dc8a487343e0}{write\+File}} (const QString \&file\+Path, const QString \&content)
+\begin{DoxyCompactList}\small\item\em Writes to a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for file management. 
+
+\mbox{\hyperlink{class_file_manager}{File\+Manager}} class is used for managing files. It allows reading and writing to a file. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_file_manager_a8afd512c06be9daf140cc19d71f9b391}\label{class_file_manager_a8afd512c06be9daf140cc19d71f9b391}} 
+\index{FileManager@{FileManager}!FileManager@{FileManager}}
+\index{FileManager@{FileManager}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{FileManager()}{FileManager()}}
+{\footnotesize\ttfamily File\+Manager\+::\+File\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Default constructor. 
+
+Initializes a new instance of the \mbox{\hyperlink{class_file_manager}{File\+Manager}} class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_file_manager_a001e45a574f07a73e84a5d646b667195}\label{class_file_manager_a001e45a574f07a73e84a5d646b667195}} 
+\index{FileManager@{FileManager}!readFile@{readFile}}
+\index{readFile@{readFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{readFile()}{readFile()}}
+{\footnotesize\ttfamily bool File\+Manager\+::read\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Path,  }\item[{QString \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Reads a file. 
+
+This method reads the content of a file and stores it in a string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path of the file to read. \\
+\hline
+{\em content} & The string where the file content will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If reading succeeds. 
+
+false If reading fails. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_file_manager_a6878ff3149c434dd8312dc8a487343e0}\label{class_file_manager_a6878ff3149c434dd8312dc8a487343e0}} 
+\index{FileManager@{FileManager}!writeFile@{writeFile}}
+\index{writeFile@{writeFile}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{writeFile()}{writeFile()}}
+{\footnotesize\ttfamily bool File\+Manager\+::write\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Path,  }\item[{const QString \&}]{content }\end{DoxyParamCaption})}
+
+
+
+Writes to a file. 
+
+This method writes the content of a string to a file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & The path of the file to write to. \\
+\hline
+{\em content} & The string to write to the file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true If writing succeeds. 
+
+false If writing fails. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/filemanagement/filemanager.\+h\item 
+src/filemanagement/filemanager.\+cpp\end{DoxyCompactItemize}

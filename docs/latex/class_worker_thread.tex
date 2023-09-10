@@ -1,0 +1,85 @@
+\hypertarget{class_worker_thread}{}\doxysection{Worker\+Thread Class Reference}
+\label{class_worker_thread}\index{WorkerThread@{WorkerThread}}
+
+
+A worker thread that performs background tasks.  
+
+
+
+
+{\ttfamily \#include $<$workerthread.\+h$>$}
+
+
+
+Inheritance diagram for Worker\+Thread\+:
+% FIG 0
+
+
+Collaboration diagram for Worker\+Thread\+:
+% FIG 1
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_worker_thread_a68e4755d3cfdf98ce34ab8ac1498bd92}{result\+Ready}} (const QString \&result)
+\begin{DoxyCompactList}\small\item\em Signal emitted when the thread\textquotesingle{}s work is completed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_worker_thread_a4a04907e80bd0776e15fbdb515cd35b3}{Worker\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_worker_thread_a7d48604849d66bdaa5e46b196eb745b6}{run}} () override
+\begin{DoxyCompactList}\small\item\em Overridden run method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A worker thread that performs background tasks. 
+
+The \mbox{\hyperlink{class_worker_thread}{Worker\+Thread}} class inherits from QThread and overrides the \mbox{\hyperlink{class_worker_thread_a7d48604849d66bdaa5e46b196eb745b6}{run()}} method to execute background tasks in a separate thread. It utilizes mutex locks for thread synchronization. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_worker_thread_a4a04907e80bd0776e15fbdb515cd35b3}\label{class_worker_thread_a4a04907e80bd0776e15fbdb515cd35b3}} 
+\index{WorkerThread@{WorkerThread}!WorkerThread@{WorkerThread}}
+\index{WorkerThread@{WorkerThread}!WorkerThread@{WorkerThread}}
+\doxysubsubsection{\texorpdfstring{WorkerThread()}{WorkerThread()}}
+{\footnotesize\ttfamily Worker\+Thread\+::\+Worker\+Thread (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Initializes a new instance of the \mbox{\hyperlink{class_worker_thread}{Worker\+Thread}} class. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_worker_thread_a68e4755d3cfdf98ce34ab8ac1498bd92}\label{class_worker_thread_a68e4755d3cfdf98ce34ab8ac1498bd92}} 
+\index{WorkerThread@{WorkerThread}!resultReady@{resultReady}}
+\index{resultReady@{resultReady}!WorkerThread@{WorkerThread}}
+\doxysubsubsection{\texorpdfstring{resultReady}{resultReady}}
+{\footnotesize\ttfamily void Worker\+Thread\+::result\+Ready (\begin{DoxyParamCaption}\item[{const QString \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Signal emitted when the thread\textquotesingle{}s work is completed. 
+
+This signal is emitted to notify that the thread has finished its work and to pass the result back to the main thread.
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & The result of the work, as a QString. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_worker_thread_a7d48604849d66bdaa5e46b196eb745b6}\label{class_worker_thread_a7d48604849d66bdaa5e46b196eb745b6}} 
+\index{WorkerThread@{WorkerThread}!run@{run}}
+\index{run@{run}!WorkerThread@{WorkerThread}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Worker\+Thread\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Overridden run method. 
+
+This method contains the code that will be executed when the thread is started. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/workerthread.\+h\item 
+src/workerthread.\+cpp\end{DoxyCompactItemize}

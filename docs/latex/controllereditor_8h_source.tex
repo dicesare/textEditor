@@ -1,0 +1,39 @@
+\hypertarget{controllereditor_8h_source}{}\doxysection{controllereditor.\+h}
+\label{controllereditor_8h_source}\index{src/controller/controllereditor.h@{src/controller/controllereditor.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef CONTROLLEREDITOR\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define CONTROLLEREDITOR\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QObject>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}../filemanagement/filemanager.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_controller_editor}{ControllerEditor}} : \textcolor{keyword}{public} QObject}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     Q\_OBJECT}
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{25     \textcolor{keyword}{explicit} \mbox{\hyperlink{class_controller_editor_aee360c9a1c99c63f82d38107a4ace55a}{ControllerEditor}}(QObject *parent = \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{34     QString \mbox{\hyperlink{class_controller_editor_a2ee044ee8112d66686acfbe54b0592b9}{getFileContent}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_controller_editor_a90b68e8f0417d3cab7b508d2a8efc82b}{setFileContent}}(\textcolor{keyword}{const} QString \&content);}
+\DoxyCodeLine{44     }
+\DoxyCodeLine{45 \textcolor{keyword}{public} slots:}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{55     Q\_INVOKABLE \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_controller_editor_a2e8cdc14791497e4dfff2cb753e37fc2}{openFile}}(\textcolor{keyword}{const} QString \&filePath);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{66     Q\_INVOKABLE \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_controller_editor_adc251e8a68f941a57166b3b3a5d0a9b2}{saveFile}}(\textcolor{keyword}{const} QString \&filePath, \textcolor{keyword}{const} QString \&content);}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68 signals:}
+\DoxyCodeLine{69     }
+\DoxyCodeLine{75     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_controller_editor_a98704e0c6b51463abfae1bb80445aeb5}{fileContentChanged}}(\textcolor{keyword}{const} QString \&content);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{private}:}
+\DoxyCodeLine{78     \mbox{\hyperlink{class_file_manager}{FileManager}} m\_fileManager;  }
+\DoxyCodeLine{79     QString m\_fileContent; }
+\DoxyCodeLine{80 \};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CONTROLLEREDITOR\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,26 @@
+\hypertarget{workerthread_8h_source}{}\doxysection{workerthread.\+h}
+\label{workerthread_8h_source}\index{src/workerthread.h@{src/workerthread.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef WORKERTHREAD\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define WORKERTHREAD\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <QThread>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <QDebug>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}mutexmanager.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_worker_thread}{WorkerThread}} : \textcolor{keyword}{public} QThread \{}
+\DoxyCodeLine{16     Q\_OBJECT  \textcolor{comment}{// Qt's macro for enabling signals and slots}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_worker_thread_a4a04907e80bd0776e15fbdb515cd35b3}{WorkerThread}}();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_worker_thread_a7d48604849d66bdaa5e46b196eb745b6}{run}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 signals:}
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_worker_thread_a68e4755d3cfdf98ce34ab8ac1498bd92}{resultReady}}(\textcolor{keyword}{const} QString \&result);}
+\DoxyCodeLine{43 \};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// WORKERTHREAD\_H}}
+
+\end{DoxyCode}
