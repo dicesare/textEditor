@@ -10,27 +10,28 @@ QString ControllerEditor::getFileContent() const
 void ControllerEditor::setFileContent(const QString &content)
 {
     m_fileContent = content;
+    emit fileContentChanged(m_fileContent); // Emit the signal
 }
 
 bool ControllerEditor::openFile(const QString &filePath)
 {
-    if (m_fileManager.readFile(filePath, m_fileContent))
+    QString content;
+    if (m_fileManager.readFile(filePath, content))
     {
-        emit fileContentChanged(m_fileContent); // Émettre le signal
+        setFileContent(content); // This will emit fileContentChanged
         return true;
     }
+    qDebug() << "Failed to read file: " << filePath; // Diagnostic
     return false;
 }
 
 bool ControllerEditor::saveFile(const QString &filePath, const QString &content)
 {
-    QFile file(filePath);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+    if (m_fileManager.writeFile(filePath, content))
     {
-        qDebug() << "Failed to open file for writing: " << file.errorString();  // Diagnostic
-        return false;
-    }    QTextStream out(&file);
-    out << content;
-    file.close();
-    return true;
+        setFileContent(content); // This will emit fileContentChanged
+        return true;
+    }
+    qDebug() << "Failed to write file: " << filePath; // Diagnostic
+    return false;
 }

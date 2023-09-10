@@ -1,20 +1,20 @@
 #include "tabwidgeteditor.h"
 
-TabWidgetEditor::TabWidgetEditor(QWidget *parent) : QTabWidget(parent)
+// Constructor: Initialize the widget and set up connections
+TabWidgetEditor::TabWidgetEditor(QWidget *parent) : QTabWidget(parent), m_currentTextEdit(nullptr)
 {
     m_modifiedTabs.append(false);
     connect(this, &QTabWidget::tabCloseRequested, this, &TabWidgetEditor::closeTab);
-
 }
 
+// Add a new tab with the given content and file path
 void TabWidgetEditor::addTabWithContent(const QString &content, const QString &filePath)
 {
     CustomTextEdit *textEditor = new CustomTextEdit(this);
     int index = addTab(textEditor, filePath);
     m_currentTextEdit = textEditor;
-    textEditor->setPlainText(content);
-    // textEditor->setIsModified(false);
 
+    textEditor->setPlainText(content);
     setTabsClosable(true);
     setCurrentIndex(index);
     setTabToolTip(index, filePath);
@@ -26,96 +26,105 @@ void TabWidgetEditor::addTabWithContent(const QString &content, const QString &f
 
     m_modifiedTabs.append(false);
 }
+
+// Close the tab at the given index
 void TabWidgetEditor::closeTab(int index)
 {
-    if (index >= 0 && index < count())
+    if (index < 0 || index >= count()) return;
+
+    QString filePath = tabToolTip(index);
+    QMessageBox::StandardButton confirmation = QMessageBox::question(
+        this, "Confirmation", "Do you want to close this tab?",
+        QMessageBox::Yes | QMessageBox::No
+    );
+
+    if (confirmation != QMessageBox::Yes) return;
+
+    CustomTextEdit *textEditor = qobject_cast<CustomTextEdit *>(widget(index));
+    if (textEditor && textEditor->isTextChanged())
     {
-        // Récupérer le chemin du fichier à partir du tooltip de l'onglet
-        QString filePath = tabToolTip(index);
-        // Demander une confirmation à l'utilisateur
-        QMessageBox::StandardButton confirmation;
-        confirmation = QMessageBox::question(this, "Confirmation", "Voulez-vous fermer cet onglet ?",
-                                             QMessageBox::Yes | QMessageBox::No);
+        QMessageBox::StandardButton saveConfirmation = QMessageBox::question(
+            this, "Confirmation", "Do you want to save changes?",
+            QMessageBox::Yes | QMessageBox::No
+        );
 
-        // Si l'utilisateur confirme, fermer l'onglet
-        if (confirmation == QMessageBox::Yes)
+        if (saveConfirmation == QMessageBox::Yes)
         {
-            CustomTextEdit *textTabEdit = qobject_cast<CustomTextEdit *>(widget(index));
-            // Si l'onglet actif est modifié, demandez à l'utilisateur s'il veut sauvegarder les modifications
-            if (textTabEdit && textTabEdit->isTextChanged())
+            QString content = textEditor->toPlainText();
+            if (!m_controllerEditor.saveFile(filePath, content))
             {
-                QTextEdit *textEditor = qobject_cast<QTextEdit *>(widget(index));
-                QString content = textEditor->toPlainText();
-                QMessageBox::StandardButton saveConfirmation;
-                saveConfirmation = QMessageBox::question(this, "Confirmation", "Voulez-vous sauvegarder les modifications ?",
-                                                         QMessageBox::Yes | QMessageBox::No);
-                // Utilisez mCurrentDirectory comme emplacement par défaut pour l'enregistrement
-                if (saveConfirmation == QMessageBox::Yes)
-                {
-                    qDebug() << "Saving to file path: " << filePath;
-
-                    // Sauvegarder le fichier
-                    if (!m_controllerEditor.saveFile(filePath, content))
-                    {
-                        QMessageBox::critical(this, "Erreur", "Échec de la sauvegarde du fichier.");
-                        return; // Ne pas fermer l'onglet si la sauvegarde échoue.
-                    }
-                }
+                QMessageBox::critical(this, "Error", "Failed to save the file.");
+                return;
             }
-
-            QWidget *widgetToRemove = widget(index);
-            removeTab(index);
-            delete widgetToRemove;
-            // Retirer l'état modifié de l'onglet supprimé du QVector
-            m_modifiedTabs.remove(index);
         }
     }
+
+    QWidget *widgetToRemove = widget(index);
+    removeTab(index);
+    delete widgetToRemove;
+    m_modifiedTabs.remove(index);
 }
 
+// Mark a tab as modified or not
 void TabWidgetEditor::setTabModified(int index, bool modified)
 {
-    if (index >= 0 && index < m_modifiedTabs.size())
-    {
-        m_modifiedTabs[index] = modified; // Définissez la valeur correspondante dans le QVector
-        // m_modifiedLabels[index]->setVisible(modified); // Affiche ou masque l'astérisque
-    }
+    if (index < 0 || index >= m_modifiedTabs.size()) return;
+
+    m_modifiedTabs[index] = modified;
 }
 
+// Update the tab text when the content is modified
 void TabWidgetEditor::handleTextModified(bool modified)
 {
-    int currentTabIndex = this->currentIndex();
-    if (currentTabIndex != -1)
-    {
-        QTextEdit *textEdit = qobject_cast<QTextEdit *>(widget(currentTabIndex));
-        if (textEdit)
-        {
-            QString tabText = this->tabText(currentTabIndex); // Utilisez 'this->' pour accéder à la fonction de la classe de base
-            if (modified)
-            {
-                // Si le fichier est modifié, ajouter un astérisque (*) à son nom dans l'onglet
-                if (!tabText.endsWith("*"))
-                {
-                    setTabText(currentTabIndex, tabText + "*");
-                    emit fileModified(true);
-                }
-            }
-            else
-            {
-                // Si le fichier n'est plus modifié, enlever l'astérisque (*) de son nom dans l'onglet
-                if (tabText.endsWith("*"))
-                {
-                    setTabText(currentTabIndex, tabText.left(tabText.length() - 1));
-                    emit fileModified(false);
-                }
-            }
+    // Get the index of the current tab
+    int index = this->currentIndex();
+    // Exit if no tab is selected
+    if (index == -1) return;
+
+    // Get the QTextEdit of the current tab
+    QTextEdit *textEditor = qobject_cast<QTextEdit *>(widget(index));
+    // Exit if the widget couldn't be cast to QTextEdit
+    if (!textEditor) return;
+
+    // Get the current tab text
+    QString tabText = this->tabText(index);
+
+    if (modified) {
+        // Add an asterisk only if it's not already there.
+        if (!tabText.endsWith("*")) {
+            setTabText(index, tabText + "*");
         }
+    } else {
+        // Remove the asterisk if the file is no longer modified.
+        if (tabText.endsWith("*")) {
+            setTabText(index, tabText.left(tabText.length() - 1));
+        }
+    }
+
+    // Emit a signal to notify that the file has been modified
+    emit fileModified(modified);
+}
+
+
+// Set the modified state for the current CustomTextEdit
+void TabWidgetEditor::setCurrentTextEditModified(bool modified)
+{
+    int currentIndex = this->currentIndex();
+    CustomTextEdit* textEdit = qobject_cast<CustomTextEdit*>(this->widget(currentIndex));
+
+    if(textEdit == nullptr) {
+        qDebug() << "CustomTextEdit pointer is null. Exiting function.";
+        return;
+    }
+
+    m_currentTextEdit = textEdit;
+
+    if (m_currentTextEdit != nullptr) {
+        m_currentTextEdit->setIsModified(modified);
+    }
+    else
+    {
+        qDebug() << "Attention : m_currentTextEdit n'est pas initialisé.";
     }
 }
 
-void TabWidgetEditor::setCurrentTextEditModified(bool modified)
-{
-    if (m_currentTextEdit)
-    {
-        m_currentTextEdit->setIsModified(modified);
-    }
-}
