@@ -1,7 +1,6 @@
-// pathglobal.cpp
 #include "pathglobal.h"
 
-// Initialiser la variable statique
+// Initialize the static variable
 QString PathGlobal::m_globalPath = QDir::homePath() + "/Documents";
 
 QString PathGlobal::getGlobalPath()

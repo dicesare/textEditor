@@ -12,18 +12,22 @@ SOURCES += \
     src/filemanagement/filemanager.cpp \
     src/controller/controllereditor.cpp \
     src/filemanagement/pathglobal.cpp \
+    src/mutexmanager.cpp \
     src/view/customtextedit.cpp \
     src/view/mainwindow.cpp \
     src/main.cpp \
-    src/view/tabwidgeteditor.cpp
+    src/view/tabwidgeteditor.cpp \
+    src/workerthread.cpp
 
 HEADERS += \
     src/filemanagement/filemanager.h \
     src/controller/controllereditor.h \
     src/filemanagement/pathglobal.h \
+    src/mutexmanager.h \
     src/view/customtextedit.h \
     src/view/mainwindow.h \
-    src/view/tabwidgeteditor.h
+    src/view/tabwidgeteditor.h \
+    src/workerthread.h
 
 FORMS += \
     mainwindow.ui

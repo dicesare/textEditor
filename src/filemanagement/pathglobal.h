@@ -1,23 +1,36 @@
-// pathglobal.h
 #ifndef PATHGLOBAL_H
 #define PATHGLOBAL_H
 
 #include <QString>
 #include <QDir>
 
-
+/**
+ * @class PathGlobal
+ * @brief Static class to manage the global path
+ * 
+ * The PathGlobal class is used to manage the global path of the application. It is designed to be static 
+ * so that it can be accessed from any part of the application.
+ */
 class PathGlobal
 {
 public:
-    // Méthode pour obtenir le chemin global
-    static QString getGlobalPath();
 
-    // Méthode pour définir le chemin global
+    /**
+     * @brief Retrieve the global path.
+     * 
+     * @return QString representing the global path.
+     */
+    static QString getGlobalPath();
+    
+    /**
+     * @brief Set the global path.
+     * 
+     * @param path The new global path as a QString.
+     */
     static void setGlobalPath(const QString &path);
 
 private:
-    // La variable statique qui stocke le chemin global
-    static QString m_globalPath;
+    static QString m_globalPath; ///< Global path storage
 };
 
 #endif // PATHGLOBAL_H

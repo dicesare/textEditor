@@ -9,12 +9,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 {
     ui->setupUi(this);
-    // Connecter l'onglet initial
+    // Initialize the CustomTextEdit instance and connect signals
     CustomTextEdit *initialTextEdit = new CustomTextEdit(this);
-    // Création de l'instance de TabWidgetEditor
-    //TabWidgetEditor *tabWidgetEditorInstance = new TabWidgetEditor(this);
-    loadRecentFiles();
-
+    // Create the initial tab and set up the initial state of the tab widget
     ui->tabWidgetEditor->removeTab(0);
     ui->tabWidgetEditor->addTab(initialTextEdit, "tab1");
     ui->tabWidgetEditor->setTabToolTip(0, mCurrentDirectory);
@@ -25,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     });
     connect(ui->actionOpen, &QAction::triggered, this, &MainWindow::openFile);
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::saveFile);
+    connect(ui->actionSave_as, &QAction::triggered, this, &MainWindow::onSaveAsTriggered);
+
     connect(ui->tabWidgetEditor, &QTabWidget::tabCloseRequested, ui->tabWidgetEditor, &TabWidgetEditor::closeTab);
     connect(ui->tabWidgetEditor, &TabWidgetEditor::cursorPositionChangedInEditor, this, &MainWindow::updateCursorPosition);
     connect(ui->pushButtonFind, &QPushButton::clicked, this, &MainWindow::pushButtonFind_clicked);
@@ -33,8 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButtonReplace, &QPushButton::clicked, this, &MainWindow::pushButtonReplace_clicked);
     connect(ui->pushButtonRecentFiles, &QPushButton::clicked, this, &MainWindow::openSelectedFileFromButton);
 
-
-    //ui->labelTextCursor->setText("Test");
+    loadRecentFiles(); // Download the recent files list
 
 }
 
@@ -42,14 +40,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+// Update the cursor position display
 void MainWindow::updateCursorPosition(CustomTextEdit *editor)
 {
     if (editor)
     {
         QTextCursor cursor = editor->textCursor();
-        int line = cursor.blockNumber() + 1; // Les numéros de ligne et de colonne sont basés sur 0
-        int col = cursor.columnNumber() + 1;
+        int line = cursor.blockNumber() + 1; // Add 1 to the line number because it starts at 0
+        int col = cursor.columnNumber() + 1; // Add 1 to the column number because it starts at 0
         ui->labelTextCursor->setText(QString("Line: %1, Col: %2").arg(line).arg(col));
     }
     else
@@ -59,28 +57,29 @@ void MainWindow::updateCursorPosition(CustomTextEdit *editor)
 
 }
 
+// Load the recent files from settings and update the list widget
 void MainWindow::loadRecentFiles()
 {
-    ui->listWidgetRecentFiles->clear(); // Nettoyer les anciens éléments
-    m_recentFiles = m_settings.value("recentFiles").toStringList(); // Charger la liste depuis QSettings
-    ui->listWidgetRecentFiles->addItems(m_recentFiles); // Ajouter les éléments à listWidgetRecentFiles
+    ui->listWidgetRecentFiles->clear(); // Clear the list widget
+    m_recentFiles = m_settings.value("recentFiles").toStringList(); // Get the recent files from settings
+    ui->listWidgetRecentFiles->addItems(m_recentFiles); // Add the recent files to the list widget  
 
-    // Connecter le signal itemClicked au slot pour ouvrir le fichier
+    // Connect the itemClicked signal to the openRecentFile slot
     connect(ui->listWidgetRecentFiles, &QListWidget::itemClicked, [this](QListWidgetItem *item) {
         openRecentFile(item->text());
     });
 }
-
+// Open the file selected from the recent files list
 void MainWindow::openSelectedFile(QListWidgetItem* item)
 {   
-    QString filePath = item->text();
+    QString filePath = item->text(); // Get the file path from the item
     QString content;
     if(m_controllerEditor.openFile(filePath))
     {
-        content = m_controllerEditor.getFileContent();
+        content = m_controllerEditor.getFileContent(); 
         QFileInfo fileInfo(filePath);
         QString fileName = fileInfo.fileName();
-        ui->tabWidgetEditor->addTabWithContent(content, fileName);
+        ui->tabWidgetEditor->addTabWithContent(content, fileName); // Add the tab with the file content
     }
     else
     {
@@ -88,28 +87,27 @@ void MainWindow::openSelectedFile(QListWidgetItem* item)
     }
 }   
 
-// Lorsqu'un utilisateur clique sur un fichier récent
+// Open the file selected from the recent files list
 void MainWindow::openRecentFile(const QString &filePath)
 {
     if (!filePath.isEmpty())
     {
         if (m_controllerEditor.openFile(filePath))
         {
-            // Utiliser QFileInfo pour extraire le nom du fichier
+            // use QFileInfo to extract the file name
             QFileInfo fileInfo(filePath);
             mCurrentDirectory = fileInfo.absolutePath();
             QString fileName = fileInfo.fileName();
 
-            ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName);
+            ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName); 
             ui->tabWidgetEditor->setTabToolTip(ui->tabWidgetEditor->count() - 1, filePath);
 
-            // Mettre à jour la liste des fichiers récents
             m_recentFiles.removeAll(filePath);
             m_recentFiles.prepend(filePath);
+            // Remove the last file path if the list size exceeds the maximum number of recent files
             while (m_recentFiles.size() > MaxRecentFiles)
                 m_recentFiles.removeLast();
-
-            // Sauvegarder la liste en utilisant QSettings
+            // Save the list using QSettings
             m_settings.setValue("recentFiles", m_recentFiles);
         }
         else
@@ -119,6 +117,7 @@ void MainWindow::openRecentFile(const QString &filePath)
     }
 }
 
+// Open the file selected from the recent files list
 void MainWindow::openSelectedFileFromButton()
 {
     QListWidgetItem *selectedItem = ui->listWidgetRecentFiles->currentItem();
@@ -127,7 +126,6 @@ void MainWindow::openSelectedFileFromButton()
     }
 }
 
-
 void MainWindow::openFile()
 {
     QString filePath = QFileDialog::getOpenFileName(this, "Open File", mCurrentDirectory, "All Files (*)");
@@ -135,16 +133,14 @@ void MainWindow::openFile()
     {
         if (m_controllerEditor.openFile(filePath))
         {
-            // Utiliser QFileInfo pour extraire le nom du fichier
+            // Use QFileInfo to extract the file name
             QFileInfo fileInfo(filePath);
             mCurrentDirectory = fileInfo.absolutePath();
             QString fileName = fileInfo.fileName();
             if (m_initialTabWidget)
             {
-                // Utilisation de votre méthode personnalisée pour ajouter un onglet
-                ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName);
+                ui->tabWidgetEditor->addTabWithContent(m_controllerEditor.getFileContent(), fileName); 
                 ui->tabWidgetEditor->setTabToolTip(ui->tabWidgetEditor->count() - 1, filePath);
-                // Enlevez l'onglet initial
                 ui->tabWidgetEditor->removeTab(0);
                 m_initialTabWidget = false;
             }
@@ -164,12 +160,24 @@ void MainWindow::openFile()
     while (m_recentFiles.size() > MaxRecentFiles)
         m_recentFiles.removeLast();
 
-    // Sauvegarder la liste en utilisant QSettings
+    // Save the list using QSettings
     m_settings.setValue("recentFiles", m_recentFiles);
 }
+
+void MainWindow::onSaveAsTriggered()
+{
+    m_actionSaveAsTriggered = true;
+    saveFile(); // Call the saveFile slot  
+}
+
 void MainWindow::saveFile()
 {
-    // Récupérer l'index de l'onglet actif dans le TabWidget
+    if (m_actionSaveAsTriggered)
+    {
+        m_actionSaveAsTriggered = false; // Reset the flag
+        m_shouldShowSaveDialog = true; // Set the flag to show the save dialog
+    }
+    
     int activeTabIndex = ui->tabWidgetEditor->currentIndex();
     if (activeTabIndex != -1)
     {
@@ -177,22 +185,16 @@ void MainWindow::saveFile()
         if (textEdit)
         {
             QString content = textEdit->toPlainText();
-            QString filePath = ui->tabWidgetEditor->tabToolTip(activeTabIndex);  // Utilisez l'info-bulle comme chemin de fichier
-            // Vérifier si le chemin du fichier est valide
-            if (filePath.isEmpty() || !QFileInfo(filePath).isFile())
+            QString filePath = ui->tabWidgetEditor->tabToolTip(activeTabIndex);  // Use the tooltip of the tab as the file path
+            if (filePath.isEmpty() || !QFileInfo(filePath).isFile() || m_shouldShowSaveDialog) // If the file path is empty or invalid, show the save dialog
             {
-                // Afficher une boîte de dialogue pour choisir où sauvegarder le fichier
                 filePath = QFileDialog::getSaveFileName(this, "Save File", mCurrentDirectory, "All Files (*)");
                 if (filePath.isEmpty())
                 {
-                    // L'utilisateur a annulé la boîte de dialogue de sauvegarde
                     return;
                 }
-
-                // Mettre à jour le chemin du fichier dans l'onglet
                 ui->tabWidgetEditor->setTabToolTip(activeTabIndex, filePath);
-
-                // Mettre à jour le texte de l'onglet pour refléter le nouveau nom du fichier
+                // Update the tab text to reflect the new file name
                 QFileInfo fileInfo(filePath);
                 QString fileName = fileInfo.fileName();
                 ui->tabWidgetEditor->setTabText(activeTabIndex, fileName);
@@ -200,9 +202,9 @@ void MainWindow::saveFile()
             if (m_controllerEditor.saveFile(filePath, content))
             {
                 QFileInfo fileInfo(filePath);
-                QString fileName = fileInfo.fileName();  // Extrait le nom du fichier à partir du chemin d'accès complet
-                ui->tabWidgetEditor->setTabText(activeTabIndex, fileName);  // Utilisez le nom du fichier pour le texte de l'onglet
-                ui->tabWidgetEditor->setCurrentTextEditModified(false);      // (Je suppose que cette méthode définit l'état 'modifié' de l'onglet actuel)
+                QString fileName = fileInfo.fileName();
+                ui->tabWidgetEditor->setTabText(activeTabIndex, fileName); 
+                ui->tabWidgetEditor->setCurrentTextEditModified(false);
 
                 QMessageBox::information(this, "Success", "File saved successfully.");
             }
@@ -214,48 +216,48 @@ void MainWindow::saveFile()
     }
 }
 
-
+// Compare this snippet from textEditor/src/view/mainwindow.cpp:
 void MainWindow::pushButtonFind_clicked()
 {
     CustomTextEdit *currentTextEdit = qobject_cast<CustomTextEdit*>(ui->tabWidgetEditor->currentWidget());
 
     if (!currentTextEdit) {
-        qDebug() << "L'éditeur de texte actif est un pointeur nul.";
+        qDebug() << "The active text editor is a null pointer.";
         return;
     }
 
-    QString searchString = ui->lineEditResearch->text().trimmed();
-    bool caseSensitive = ui->checkBoxUppercase->isChecked();
-    bool wholeWordsOnly = ui->checkBoxWordOnly->isChecked();
+    QString searchString = ui->lineEditResearch->text().trimmed();// Get the search string from the line edit
+    bool caseSensitive = ui->checkBoxUppercase->isChecked();// Get the caseSensitive flag from the checkbox
+    bool wholeWordsOnly = ui->checkBoxWordOnly->isChecked();// Get the wholeWordsOnly flag from the checkbox
 
     QTextDocument::FindFlags flags;
-
+    // If the caseSensitive flag is set, add the QTextDocument::FindCaseSensitively flag
     if(caseSensitive) {
         flags |= QTextDocument::FindCaseSensitively;
     }
-
+    // If the wholeWordsOnly flag is set, add the QTextDocument::FindWholeWords flag
     if(wholeWordsOnly) {
         flags |= QTextDocument::FindWholeWords;
     }
 
-    QTextCursor cursor = currentTextEdit->textCursor();
+    QTextCursor cursor = currentTextEdit->textCursor();// Get the cursor from the current text editor
 
-    QTextCursor found = currentTextEdit->document()->find(searchString, cursor, flags);
-
+    QTextCursor found = currentTextEdit->document()->find(searchString, cursor, flags);// Find the search string
+    // If the search string is not found, move the cursor to the beginning of the document and try again
     if(found.isNull()) {
         cursor.setPosition(0);
         found = currentTextEdit->document()->find(searchString, cursor, flags);
     }
-
+    // If the search string is found, update the cursor
     if(!found.isNull()) {
         currentTextEdit->setTextCursor(found);
         m_lastFoundCursor = found; // Update m_lastFoundCursor
     }
 }
-
+// Compare this snippet from textEditor/src/view/mainwindow.cpp:
 void MainWindow::pushButtonNext_clicked()
 {
-    pushButtonFind_clicked();
+    pushButtonFind_clicked();// Call the pushButtonFind_clicked slot to find the next occurrence (RECURSIVE)
 }
 
 void MainWindow::pushButtonPrevious_clicked()
@@ -263,7 +265,7 @@ void MainWindow::pushButtonPrevious_clicked()
     CustomTextEdit *currentTextEdit = qobject_cast<CustomTextEdit*>(ui->tabWidgetEditor->currentWidget());
 
     if (!currentTextEdit) {
-        qDebug() << "L'éditeur de texte actif est un pointeur nul.";
+        qDebug() << "The active text editor is a null pointer.";
         return;
     }
 
@@ -286,28 +288,28 @@ void MainWindow::pushButtonPrevious_clicked()
     QTextCursor found = currentTextEdit->document()->find(searchString, cursor, flags);
 
     if(found.isNull()) {
-        // Déplacer le curseur à la fin du document et essayer à nouveau
+        // Move the cursor to the end of the document and try again
         cursor.movePosition(QTextCursor::End);
         found = currentTextEdit->document()->find(searchString, cursor, flags);
     }
-
+    // If the search string is found, update the cursor
     if(!found.isNull()) {
         currentTextEdit->setTextCursor(found);
     }
 }
 
-
+// Compare this snippet from textEditor/src/view/mainwindow.cpp:
 void MainWindow::pushButtonReplace_clicked()
 {
     CustomTextEdit *currentTextEdit = qobject_cast<CustomTextEdit*>(ui->tabWidgetEditor->currentWidget());
 
     if (!currentTextEdit) {
-        qDebug() << "L'éditeur de texte actif est un pointeur nul.";
+        qDebug() << "The active text editor is a null pointer.";
         return;
     }
 
     if(m_lastFoundCursor.isNull() || m_lastFoundCursor.selectedText().isEmpty()) {
-        qDebug() << "Aucun texte sélectionné pour le remplacement.";
+        qDebug() << "No text selected for replacement.";
         return;
     }
 
