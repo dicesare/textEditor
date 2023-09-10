@@ -4,6 +4,7 @@ TabWidgetEditor::TabWidgetEditor(QWidget *parent) : QTabWidget(parent)
 {
     m_modifiedTabs.append(false);
     connect(this, &QTabWidget::tabCloseRequested, this, &TabWidgetEditor::closeTab);
+
 }
 
 void TabWidgetEditor::addTabWithContent(const QString &content, const QString &filePath)
@@ -17,7 +18,12 @@ void TabWidgetEditor::addTabWithContent(const QString &content, const QString &f
     setTabsClosable(true);
     setCurrentIndex(index);
     setTabToolTip(index, filePath);
+
     connect(textEditor, &CustomTextEdit::textModified, this, &TabWidgetEditor::handleTextModified);
+    connect(textEditor, &CustomTextEdit::cursorPositionChanged, this, [this, textEditor]() {
+        emit cursorPositionChangedInEditor(textEditor);
+    });
+
     m_modifiedTabs.append(false);
 }
 void TabWidgetEditor::closeTab(int index)
@@ -25,7 +31,7 @@ void TabWidgetEditor::closeTab(int index)
     if (index >= 0 && index < count())
     {
         // Récupérer le chemin du fichier à partir du tooltip de l'onglet
-        QString filePath = mCurrentDirectory + "/" + tabToolTip(index);
+        QString filePath = tabToolTip(index);
         // Demander une confirmation à l'utilisateur
         QMessageBox::StandardButton confirmation;
         confirmation = QMessageBox::question(this, "Confirmation", "Voulez-vous fermer cet onglet ?",
@@ -46,6 +52,8 @@ void TabWidgetEditor::closeTab(int index)
                 // Utilisez mCurrentDirectory comme emplacement par défaut pour l'enregistrement
                 if (saveConfirmation == QMessageBox::Yes)
                 {
+                    qDebug() << "Saving to file path: " << filePath;
+
                     // Sauvegarder le fichier
                     if (!m_controllerEditor.saveFile(filePath, content))
                     {
